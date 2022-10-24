@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>Mini-Fetch</title> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <style type="text/css" id="gwd-text-style">
+            p {
+            margin: 0px;
+            }
+            h1 {
+            margin: 0px;
+            }
+        </style>
+        <style type="text/css">
+            html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            }
+            body {
+            background-color: transparent;
+            }
+            .gwd-div-juoq {
+            left: 0px;
+            top: 0px;
+            }
+            .gwd-jog-button {
+            color: rgb(255, 255, 255);
+            font-size: 50px;
+            }
+            .top-label {
+            font-size: 1em;
+            }
+            .preventTapToZoom {
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            user-select: none;
+            }
+            .form-switch.form-switch-md .form-check-input {
+            height: 1.5rem;
+            width: calc(2rem + 0.75rem);
+            border-radius: 3rem;
+            }
+            .form-switch.form-switch-lg .form-check-input {
+            height: 2rem;
+            width: calc(3rem + 0.75rem);
+            border-radius: 4rem;
+            }
+        </style>
+    </head>
+    <body class="htmlNoPages">
+        <div class="container-fluid d-flex flex-column col-12 gwd-div-juoq" id="MainDiv"></div>
+            <div class="row g-3 h-10" style="padding-top: 1em; padding-bottom: 1em;" id="TopSection">
+                <div class="d-grid col-12 g-1" id="TopSettings">
+                    <p class="display-6 text-center" style="font-size: 3em;">Mini-Fetch</p>
+                </div>
+            </div>
+            <div class="row g-4 h-75" style="padding-left: 1em; padding-right: 0.7em; padding-top: 1em; padding-bottom: 0em;" id="MidSection">
+                <div class="d-grid gap-4 col-4" id="MidLeft">
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(1)' id="btn1">1</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(2)' id="btn2">2</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(3)' id="btn3">3</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(4)' id="btn4">4</button>
+                </div>
+                <div class="d-grid gap-4 col-4" id="MidLeft">
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(5)' id="btn5">5</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(6)' id="btn6">6</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(7)' id="btn7">7</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(8)' id="btn8">8</button>
+                </div>
+                <div class="d-grid gap-4 col-4" id="MidLeft">
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(9)' id="btn9">9</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(10)' id="btn10">10</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(11)' id="btn11">11</button>
+                    <button type="button" class="btn btn-lg btn-primary preventTapToZoom" style="font-size: 1rem;" onpointerdown='newMagnetSelected(12)' id="btn12">12</button>
+                </div>
+            </div>
+            <div class="row g-3 h-40" style="padding-left: 1.5em; padding-right: 1.2em; padding-top: 1em; padding-bottom: 0em;" id="BottomSection">
+                <button type="button" class="btn btn-lg btn-danger preventTapToZoom" style="font-size: 3rem;" onpointerdown='newMagnetSelected(0)'>Stop</button>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <script>
+            var prevId = null;
+            function activate(id) {
+                if (id != null) {
+                    var button = $(document.getElementById("btn" + id));
+                    button.data('status', 'Active');
+                    button.removeClass("btn-primary").addClass("btn-success ");
+                }
+            }
+            function deactivate(id) {
+                if (id != null) {
+                    var button = $(document.getElementById("btn" + id));
+                    button.data('status', 'Inactive');
+                    button.removeClass("btn-success").addClass("btn-primary ");
+                }
+            }
+            function toggleActive(id){
+                if (id != null){
+                    var button = $(document.getElementById("btn" + id));
+                    if (button.data('status') == 'Active') {
+                        deactivate(id)
+                    } else {
+                        activate(id)
+                    }
+                }
+            }
+            function newMagnetSelected(id) {
+                toggleActive(id);
+                if(id != prevId){
+                    deactivate(prevId);
+                    prevId = id;
+                }
+                makeAjaxCall("magnet",{"num":id});             
+            }
+            function makeAjaxCall(url,data){
+                $.ajax({
+                "url": url,
+                "data": data,
+                "success": function( result ) {
+                    console.log("Ajax result: "+result);
+                    } 
+                });
+            }
+        </script>
+    </body>
+</html>
